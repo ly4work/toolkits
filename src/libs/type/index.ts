@@ -90,3 +90,15 @@ export const isObject: IsType = (val: any) => {
 export const isArray: IsType = (val: any) => {
   return val && typeof val === 'object' && Object.prototype.toString.call(val).toLowerCase() === '[object array]';
 }
+
+
+export default {
+  isNumber,
+  isString,
+  isBoolean,
+  isNull,
+  isUndefined,
+  isFunction,
+  isObject,
+  isArray
+}

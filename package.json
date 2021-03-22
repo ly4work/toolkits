@@ -1,5 +1,5 @@
 {
-  "name": "brid",
+  "name": "toolkits",
   "version": "1.0.0",
   "description": "Brid, means a bridge. Just an API-Bridge to cover browser, nodejs, hybrid-app .etc",
   "repository": "https://github.com/ly4work/brid.git",
@@ -13,6 +13,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
+    "doc": "jsdoc -c jsdoc.json",
     "test-cover": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "test": "jest --coverage=true"
   },
