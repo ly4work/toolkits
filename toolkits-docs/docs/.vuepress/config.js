@@ -5,14 +5,14 @@ module.exports = {
   plugins: ["@vuepress/back-to-top"],
   base: '',
   port: '8024',
-  // dest: './../',
+  dest: './../docs/',
   themeConfig: {
     nav: [
       {
         text: "Languages",
         ariaLabel: "Language Menu",
         items: [
-          { text: "Chinese", link: "/language/chinese/" },
+          { text: "简体中文", link: "/" },
           { text: "Japanese", link: "/language/japanese/" },
         ],
       },

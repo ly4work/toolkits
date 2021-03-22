@@ -1,7 +1,7 @@
 {
   "name": "toolkits",
   "version": "1.0.0",
-  "description": "Brid, means a bridge. Just an API-Bridge to cover browser, nodejs, hybrid-app .etc",
+  "description": "Toolkits, Just an API-Toolkits to be used in browser, nodejs, hybrid-app .etc",
   "repository": "https://github.com/ly4work/brid.git",
   "author": "liyang66 <ly4work@163.com>",
   "keywords": [
@@ -13,9 +13,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "jsdoc": "jsdoc -c jsdoc.json",
-    "doc-init": "docsify init ./docs",
-    "doc-server": "docsify serve docs",
+    "docs:dev": "cd toolkits-docs && yarn dev",
+    "docs:build": "cd toolkits-docs && yarn build",
     "test-cover": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "test": "jest --coverage=true"
   },
