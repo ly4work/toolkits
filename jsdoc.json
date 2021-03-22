@@ -1,13 +1,46 @@
 {
   "source": {
-    "include": ["src/"],
-    "exclude": ["src/libs"]
+    "include": ["src", "src/libs/type/index.ts", "./README.md"]
   },
   "opts": {
-    "template": "templates/default",
+    "template": "node_modules/docdash",
     "encoding": "utf8",
     "destination": "./docs/",
     "recurse": true,
-    "verbose": false
+    "verbose": true
+  },
+  "templates": {
+    "cleverLinks": true,
+    "default": {
+      "outputSourceFiles": true,
+      "includeDate": false,
+      "useLongnameInNav": false,
+      "systemName": "Common Modules",
+      "footer": "",
+      "navType": "vertical",
+      "layoutFile": "plugins/layout.tmpl"
+    }
+  },
+  "docdash": {
+    "search": true,
+    "collapse": true,
+    "footer": "",
+    "meta": {
+      "title": "函数工具库",
+      "description": "日常 JavaScript  函数工具库，方便查看",
+      "keyword": "javaScript, utils, jsdoc"
+    },
+    "menu": {
+      "GitHub": {
+        "href": "https://github.com/ly4work/toolkits",
+        "class": "menu-item",
+        "id": "website_link"
+      }
+    }
+  },
+  "plugins": ["jsdoc-plugin-typescript", "plugins/delFooter.js"],
+  "typescript": {
+    "moduleRoot": "src",
+    "template": "node_modules/docdash"
   }
 }

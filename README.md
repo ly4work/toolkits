@@ -1,2 +1,2 @@
-# brid
-Brid, means a bridge. Just an API-Bridge to cover browser, nodejs, hybrid-app .etc
+# Toolkits
+Toolkits, Just an API-Toolkits to be used in browser, nodejs, hybrid-app .etc

@@ -1,4 +1,4 @@
-import type from './libs/type'
+import type from './externals/type'
 export default class Tookits {
   public static readonly extends = (obj: Object) => {
     Object.assign(Tookits, obj)

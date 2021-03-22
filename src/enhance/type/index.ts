@@ -4,12 +4,15 @@
 type IsType = (val: any) => boolean
 
 /**
- * isNumber 是否Number
- * @param val any
- * @returns boolean
- * @author liyang
- * @date 2021/03/08
- */
+* @description 判断是否数字
+* @param {Any} val
+* @return {Boolean} 
+* @author liyang
+* @date 2021/03/08
+*
+* @example
+* isNumber(123) => true
+*/
 export const isNumber: IsType = (val: any) => {
   return typeof val === 'number'
 }
