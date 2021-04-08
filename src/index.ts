@@ -5,6 +5,7 @@
  */
 
 import type from './enhance/type'
+import test from './core/test'
 export default class Tookits {
   /**
    * use 拓展中间件集成方法
@@ -19,4 +20,5 @@ export default class Tookits {
   }
   //  类型判断类
   public static type = type
+  public static test = test
 }
