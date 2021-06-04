@@ -1,73 +1,13 @@
 /**
- * @(#)2021/02/05.
- * 本地Storage缓存控制
- * @author Liyang
- * Copyright (c) 2021, GOLDKINN. All rights reserved.
+ * DB storage存储
+ * @author liyang
+ * @date 2021/04/09
  */
-
-import {
-  // isArray,
-  // pick,
-  // map,
-  // mergeWith,
-  get as lodashGet,
-  // isString,
-  // isEqual,
-  set as lodashSet,
-} from 'lodash';
-
-/**
- * lodash的 get函数超集，当取得值为null、 null、undefined,''将返回默认值
- * path支持数组，会依次选取优先级高的放前面
- * @static
- * @param {object} obj 源数据
- * @param {string|array} path 参数路径
- * @param {*} defaultValue 默认值
- * @returns
- *
- */
-export const get = function (obj, path, defaultValue) {
-  let value = null;
-  const rules = [null, 'null', '', undefined];
-  const pathList = toArray(path);
-  for (let p of pathList) {
-    value = lodashGet(obj, p + '', null);
-    if (!rules.includes(value)) {
-      return value;
-    }
+ class DB {
+  public static Store = {
+    local: window.localStorage,
+    session: window.sessionStorage
   }
-  return defaultValue;
-};
-
-export const set = function (obj, path, value) {
-  if (isEmpty(path)) {
-    merge(obj, value);
-  } else {
-    lodashSet(...arguments);
-  }
-};
-/**
- * 转换成数组
- *
- * @param {*} source
- * @returns
- */
-export const toArray = function (source) {
-  if (source instanceof Array) {
-    return source;
-  } else {
-    const result = source != null ? [source] : [];
-    return result;
-  }
-};
-
-/**
- * @(#)2021/02/05.
- * DB 缓存控制器
- * @author Liyang
- */
-class DB {
-  static storeType = 'local';
 
   /**
    * 从缓存提取值
@@ -77,11 +17,15 @@ class DB {
    * @returns
    * @memberof DB
    */
-  static get(key, storeType = 'local') {
-    const type = get(DB, 'storeType', storeType);
-    const store = type === 'local' ? localStorage : sessionStorage;
-    let localValue = store.getItem(key);
-    return localValue ? JSON.parse(localValue) : null;
+  public static readonly get = (key: string, type = 'local') => {
+    const store = DB.getRealStore(type)
+
+    let value = store.getItem(key) as string;
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      return value;
+    }
   }
 
   /**
@@ -92,10 +36,16 @@ class DB {
    * @param {string} value 值
    * @memberof DB
    */
-  static set(key, value, storeType = 'local') {
-    const type = get(DB, 'storeType', storeType);
-    const store = type === 'local' ? localStorage : sessionStorage;
-    store.setItem(key, JSON.stringify(value));
+  public static readonly set = (key: string, value: any, type = 'local') => {
+    const store = DB.getRealStore(type)
+    if (typeof value == 'object') {
+      store.setItem(key, JSON.stringify(value));
+    } else {
+      store.setItem(key, value);
+    }
+    if (value == undefined || value == null) {
+      store.removeItem(key);
+    }
   }
   /**
    *
@@ -105,11 +55,21 @@ class DB {
    * @param {string} value 值
    * @memberof DB
    */
-  static remove(key, storeType = 'local') {
-    const type = get(DB, 'storeType', storeType);
-    const store = type === 'local' ? localStorage : sessionStorage;
+  public static readonly remove = (key: string, type = 'local') => {
+    const store = DB.getRealStore(type)
     store.removeItem(key);
   }
+
+  public static readonly getRealStore = (type: string = 'local') => {
+    return type === 'local' ? DB.Store.local : DB.Store.session;
+  }
+
+  public static readonly has = (key: string, type: string = 'local') => {
+    const store = DB.getRealStore(type)
+    return !!store.getItem(key);
+
+  }
+
 }
 
-export { DB };
+export default DB
